@@ -36,7 +36,7 @@ public class Singleton {
     }
 }
 
-//Bill Pugh Singleton (Best Practice for Lazy Loading)
+// Bill Pugh Singleton (Best Practice for Lazy Loading)
 public class Singleton {
     // Private constructor
     private Singleton() {}
