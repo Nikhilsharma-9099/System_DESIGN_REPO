@@ -1,0 +1,111 @@
+Database Design and Integration in LLD
+Use-Case: Razorpay Payment System
+Designing robust, scalable, and maintainable systems requires a deep understanding of how to structure and integrate databases effectively. In Low-Level Design (LLD), this involves bridging the gap between abstract requirements and real-world implementation. This article covers the core topics you must know to implement sound database design and integration practices using Razorpay's payment system as a use case.
+
+1. What is an ER Model?
+The Entity-Relationship (ER) Model is a high-level conceptual data model used to define data elements and their relationships for a given system. It provides a visual representation through ER diagrams that depict:
+
+Entities: Real-world objects or concepts (e.g., User, Transaction, Merchant).
+Attributes: Properties of entities (e.g., User may have user_id, email, KYC_status).
+Relationships: Connections between entities (e.g., User initiates a Transaction).
+Use-case Example – Razorpay:
+
+Entities: User, Merchant, Payment, Invoice
+Relationships: User → makes → Payment, Merchant → receives → Payment
+
+
+
+
+2. How to Design Tables from Requirements?
+Once entities and relationships are identified, translate them into relational tables.
+
+Steps:
+Extract entities from requirements
+Define attributes for each entity
+Determine primary and foreign keys
+Normalize the schema (1NF, 2NF, 3NF)
+Add constraints and indexes
+Example – Razorpay Payment Flow:
+
+Requirement: A user pays a merchant through a payment gateway using a payment method.
+
+users(user_id, name, email, phone)
+merchants(merchant_id, name, business_type)
+payments(payment_id, user_id, merchant_id, amount, method, timestamp)
+payment_methods(method_id, type, provider)
+    
+3. Mapping ER → Class Model
+To integrate database design into the application layer, ER diagrams are mapped to object-oriented class models.
+
+Mapping Principles:
+Each entity → becomes a class
+Each attribute → becomes a field
+Relationships → become associations (one-to-one, one-to-many, many-to-many)
+Example – Razorpay Class Model (Java):
+
+class User {
+    Long id;
+    String name;
+    String email;
+    List<Payment> payments;
+}
+
+class Payment {
+    Long id;
+    User user;
+    Merchant merchant;
+    Double amount;
+    String method;
+}
+
+
+
+    
+4. What is DAO?
+DAO (Data Access Object) is a design pattern that abstracts and encapsulates all access to the data source. It separates persistence logic from business logic.
+
+Benefits:
+Loose coupling between database and code
+Easier to test and maintain
+Encourages separation of concerns
+Example – Java DAO Interface:
+
+public interface PaymentDAO {
+    Payment getPaymentById(Long id);
+    List<Payment> getPaymentsByUser(Long userId);
+    void save(Payment payment);
+}
+
+
+
+    
+5. What is Repository?
+The Repository pattern is an abstraction that provides a collection-like interface for accessing domain objects. It's often used with ORMs like Spring Data JPA.
+
+DAO vs Repository:
+DAO	Repository
+Focused on persistence	Focused on domain object collection
+More database-centric	More business/domain-centric
+May include SQL details	Often auto-implemented by frameworks
+Example – Spring Repository:
+
+public interface PaymentRepository extends JpaRepository<Payment, Long> {
+    List<Payment> findByUserId(Long userId);
+}
+
+
+
+    
+6. Real-World Enhancements and Practices
+Building scalable systems involves more than just ER modeling. Here are industry practices for robust systems:
+
+Read/Write Optimization: Use replicas for reads, batch inserts for writes.
+Caching Layer: Use Redis or Memcached to store frequently accessed data.
+Auditing and Logging: Store transaction logs and enable change data capture (CDC).
+Security Best Practices: Encrypt sensitive fields and use role-based access control (RBAC).
+Schema Versioning: Use Flyway or Liquibase for migrations.
+Testing and Monitoring: Write integration tests and use tools like Grafana/Prometheus for DB monitoring.
+Conclusion
+Effective database design and integration in LLD are crucial for building robust backend systems like the Razorpay payment gateway. Understanding ER modeling, translating it into relational schema, mapping to class models, and adopting patterns like DAO and Repository ensures scalability and maintainability. Applying real-world practices further hardens the system against performance, security, and operational risks.
+
+Mastering these principles sets a strong foundation for building high-quality, production-grade systems in any backend engineering role.
