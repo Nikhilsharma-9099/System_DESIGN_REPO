@@ -65,6 +65,8 @@ HTTP Status Code Guidelines:
 2xx – Success
 4xx – Client errors (e.g., 400 Bad Request, 401 Unauthorized, 404 Not Found)
 5xx – Server errors (e.g., 500 Internal Server Error, 503 Service Unavailable)
+
+
 6. Versioning
 API versioning is critical for evolving your product without breaking existing clients. It helps manage backward-incompatible changes.
 
@@ -114,6 +116,7 @@ Retry-After: 60
 {
   "error": "Too many requests. Please retry after 60 seconds."
 }
+
   
 Conclusion
 Thoughtfully designed APIs act as stable foundations for digital products, enabling scalable innovation and collaboration. By focusing on consistent design, proper versioning, and strong security measures, organizations can provide developers with tools that are intuitive, safe, and future-proof.
