@@ -1,0 +1,31 @@
+Why does thrashing occur?
+
+Abstract
+Thrashing occurs when a process spends more time in paging (swapping pages in and out of memory) than executing instructions. It usually happens when the degree of multiprogramming is too high, leading to a sharp drop in CPU utilization.
+
+Definition
+Thrashing occurs when CPU utilization falls sharply due to excessive paging. When more processes are introduced to increase CPU utilization, processes may require more frames than available. This causes frequent page faults, long queues for the paging device, and further decreases in CPU utilization. As the CPU scheduler tries to compensate by adding even more processes, the system enters a cycle of continuous paging, known as thrashing.
+
+Cause of Thrashing
+High degree of multiprogramming exceeds available memory frames.
+Processes frequently request pages not in memory, causing page faults.
+Excessive paging reduces CPU execution time and overall system throughput.
+New processes steal memory frames from existing processes, increasing page faults further.
+
+Working Set Model
+Thrashing can be mitigated using the working set model, based on the principle of locality of reference. A working set is the set of pages a process is actively using within a time window Δ.
+
+If a page is actively used within Δ time units, it is part of the working set.
+Size of working set (WSS) indicates the number of frames a process needs.
+Total demand for frames: D = Σ WSSi, where D is the sum of working set sizes of all processes.
+Thrashing occurs if D exceeds available memory frames.
+
+
+Minimizing Thrashing
+Local Replacement: Prevents one process from stealing frames from another, reducing cascading page faults.
+Working Set Strategy: Ensures each process gets enough frames to hold its active pages, maximizing CPU utilization while minimizing thrashing.
+
+Summary
+A process is thrashing if it spends more time in paging than executing.
+Thrashing occurs when increasing the degree of multiprogramming leads to a sharp drop in CPU utilization.
+It can be minimized using local replacement policies and the working set model.
