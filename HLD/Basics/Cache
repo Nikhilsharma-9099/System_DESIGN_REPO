@@ -1,1 +1,52 @@
+What is cache?
 
+Abstract
+Cache memory is a small, high-speed memory located near the CPU, designed to store recently accessed instructions and data. The primary function of cache is to improve system performance by reducing the time required to access frequently used data and instructions.
+
+Scope
+This article explains cache memory in detail, its functionality, principles, types, and how cache performance is measured and improved.
+
+Definition of Cache
+Cache memory is a small, fast memory unit that holds copies of the data and instructions that are frequently accessed by the CPU. By storing recently used data, the cache reduces the time it takes for the CPU to retrieve instructions and data, thereby enhancing performance.
+
+
+The effectiveness of cache memory is based on the principle of locality of reference, which states that programs tend to access a small subset of data and instructions repeatedly. By placing these active segments in cache memory, the CPU can reduce the total execution time.
+
+Cache Hit vs Cache Miss
+When the CPU requests a memory reference, the cache is checked first. - If the requested data is found in the cache, it's called a Cache Hit. - If the data is not found, it's called a Cache Miss, and the data is fetched from a lower level of the memory hierarchy (such as main memory) and placed in the cache for future access.
+
+Cache Organization and Memory Hierarchy
+Cache memory operates by transferring a block of elements from the main memory to the cache memory. This is based on the expectation that the next requested element will be nearby (this is known as spatial locality). This helps in reducing access time and improving performance.
+
+A block of data from the main memory is transferred to the cache when a cache miss occurs. The goal is to place frequently accessed data in the cache so the CPU can quickly retrieve it, minimizing the time spent on memory accesses.
+
+Locality of Reference
+The underlying principle of cache memory is the locality of reference, which can be divided into two types:
+
+Spatial Locality: Refers to the tendency of the CPU to access adjacent memory locations. If a program accesses a memory location, it is likely to access neighboring locations in the near future.
+Temporal Locality: Refers to the tendency of the CPU to repeatedly access the same memory locations within a short time period. This indicates that recently accessed data is likely to be accessed again soon.
+Cache Performance and Hit Ratio
+Cache performance is commonly measured using the hit ratio, which is defined as:
+
+Hit Ratio = (Number of Hits) / (Total Accesses) = hits / (hits + misses)
+
+A higher hit ratio means that the CPU is retrieving data more frequently from the cache, leading to better performance. Several factors can improve cache performance:
+
+Increasing the cache block size
+Using higher cache associativity
+Reducing the miss rate
+Reducing the miss penalty (the time taken to fetch data from main memory after a cache miss)
+Reducing the time to hit the cache
+Cache Line Organization
+Cache is organized in cache lines instead of individual bytes. Each cache line contains a fixed number of bytes (typically 16 to 64 bytes) and is designed to hold contiguous data that is likely to be accessed together. The cache lines do not have a fixed address, allowing the cache to store data from various locations in memory.
+
+Methods for Filling Cache Lines
+There are three main methods for filling cache lines:
+
+Fully Associated: The most flexible method, where any memory block can be placed in any cache line.
+Direct Mapped: The simplest method, where each memory block is mapped to exactly one cache line.
+Self Associated: A combination of the two methods, offering flexibility with some mapping constraints.
+
+
+Summary
+Cache memory is a crucial component in modern computer systems, providing fast access to frequently used data and instructions, which significantly improves system performance. Cache relies on the principle of locality of reference and uses hit ratios to measure its effectiveness. By optimizing cache size, associativity, and miss rates, the performance of cache memory can be further improved.
